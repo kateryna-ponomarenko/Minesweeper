@@ -14,6 +14,7 @@ private:
 	MineGenerator* generator = nullptr;
 
 public:
+	
 	Board(int w, int h, int mines) : width(w), height(h), mineCount(mines)
 	{
 		for (int y = 0; y < height; ++y)
@@ -34,12 +35,11 @@ public:
 
 	void generateMines(int safeX, int safeY)
 	{
-		if (generator)
+		if (generator != nullptr)
 		{
 			generator->generate(cells, safeX, safeY);
+			countNeighbourMines();
 		}
-
-		generator->generate(cells, safeX, safeY);
 	}
 
 	void countNeighbourMines() 
@@ -112,6 +112,10 @@ public:
 			}
 		}
 	} 
+	
+	int getWidth() { return width; }
+	int getHeight() { return height; }
+	int getMineCount() { return mineCount; }
 	
 	
 

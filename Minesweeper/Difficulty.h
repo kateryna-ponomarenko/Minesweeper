@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <string>
 
 class Difficulty
 {
@@ -15,7 +16,7 @@ public:
         : level(n), width(w), height(h), minesCount(m), timeLimitSeconds(t) {
     }
 
-    int getWithd() const { return width; }
+    int getWidth() const { return width; }
     int getHeight() const { return height; }
     int getMinesCount() const { return minesCount; }
     int getLimitSeconds() const { return timeLimitSeconds; }

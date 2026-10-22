@@ -3,6 +3,8 @@
 #include "Cell.h"
 #include <vector>
 #include <random>
+#include <algorithm>
+#include <cmath>
 
 class SafeFirstClickGenerator :
     public MineGenerator

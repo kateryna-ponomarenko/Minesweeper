@@ -3,6 +3,9 @@
 #include "Cell.h"
 #include <vector>
 #include <random>
+#include <algorithm>
+#include <cmath>
+
 class RandomMineGenerator :
     public MineGenerator
 {

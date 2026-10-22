@@ -27,23 +27,20 @@ public:
 		if (!IsRevealed && !IsFlagged)
 		{
 			IsRevealed = true;
-			if (hasMine)
-			{
-				// Handle mine reveal
-			}
-			else if (neighboringMines == 0)
-			{
-				// Handle revealing neighboring cells logic here
-			}
-			else if (neighboringMines > 0)
-			{
-				// Handle revealing the number of neighboring mines logic here
-			}
+			//if (hasMine)
+			//{
+			//	// Handle mine reveal
+			//}
+			//else if (neighboringMines == 0)
+			//{
+			//	// Handle revealing neighboring cells logic here
+			//}
+			//else if (neighboringMines > 0)
+			//{
+			//	// Handle revealing the number of neighboring mines logic here
+			//}
 		}
-		else if (IsQuestioned)
-		{
-			std::cout << "Cell is questioned." << std::endl	;
-		}
+		
 	}
 	void cycleMark()
 	{
