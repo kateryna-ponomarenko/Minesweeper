@@ -10,6 +10,7 @@ private:
 	bool IsFlagged;
 	bool IsQuestioned;
 	int neighboringMines;
+	bool isTimeMine = false;
 
 public:
 	
@@ -94,5 +95,9 @@ public:
 	{
 		return CellY;
 	}
+
+
+	void setTimeMine(bool value) { isTimeMine = value; }
+	bool getIsTimeMine() const { return isTimeMine; }
 
 };

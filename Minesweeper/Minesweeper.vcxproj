@@ -145,12 +145,18 @@
     <ClCompile Include="EasyDifficulty.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="HardDifficulty.cpp" />
+    <ClCompile Include="LostState.cpp" />
     <ClCompile Include="MediumDifficulty.cpp" />
     <ClCompile Include="MineGenerator.cpp" />
     <ClCompile Include="Minesweeper.cpp" />
+    <ClCompile Include="PlayingState.cpp" />
     <ClCompile Include="RandomMineGenerator.cpp" />
+    <ClCompile Include="ReadyState.cpp" />
     <ClCompile Include="SafeFirstClickGenerator.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="WonState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
@@ -159,11 +165,17 @@
     <ClInclude Include="EasyDifficulty.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="HardDifficulty.h" />
+    <ClInclude Include="LostState.h" />
     <ClInclude Include="MediumDifficulty.h" />
     <ClInclude Include="MineGenerator.h" />
+    <ClInclude Include="PlayingState.h" />
     <ClInclude Include="RandomMineGenerator.h" />
+    <ClInclude Include="ReadyState.h" />
     <ClInclude Include="SafeFirstClickGenerator.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="WonState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

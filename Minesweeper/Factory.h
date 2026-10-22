@@ -6,5 +6,14 @@
 
 class Factory
 {
+public:
+	static Board create(const Difficulty& difficulty, MineGenerator* generator)
+	{
+		Board board(difficulty.getWithd(), difficulty.getHeight(), difficulty.getMinesCount());
+		board.setGenerator(generator);
+
+		return board;
+	
+	}
 };
 
