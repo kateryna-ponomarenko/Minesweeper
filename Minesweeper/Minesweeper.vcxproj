@@ -139,7 +139,31 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="Difficulty.cpp" />
+    <ClCompile Include="EasyDifficulty.cpp" />
+    <ClCompile Include="Factory.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="HardDifficulty.cpp" />
+    <ClCompile Include="MediumDifficulty.cpp" />
+    <ClCompile Include="MineGenerator.cpp" />
     <ClCompile Include="Minesweeper.cpp" />
+    <ClCompile Include="RandomMineGenerator.cpp" />
+    <ClCompile Include="SafeFirstClickGenerator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="Cell.h" />
+    <ClInclude Include="Difficulty.h" />
+    <ClInclude Include="EasyDifficulty.h" />
+    <ClInclude Include="Factory.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="HardDifficulty.h" />
+    <ClInclude Include="MediumDifficulty.h" />
+    <ClInclude Include="MineGenerator.h" />
+    <ClInclude Include="RandomMineGenerator.h" />
+    <ClInclude Include="SafeFirstClickGenerator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
