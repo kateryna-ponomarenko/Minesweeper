@@ -11,10 +11,11 @@ class SafeFirstClickGenerator :
 {
 private:
     int mineCount;
-
+    int timeMineCount;
 
 public:
-    SafeFirstClickGenerator(int count) : mineCount(count) {}
+    SafeFirstClickGenerator(int count, int timeCount = 0)
+        : mineCount(count), timeMineCount(timeCount) {}
 
     void generate(std::vector<std::vector<Cell>>& board, int safeX, int safeY) override {
         int width = board[0].size();
@@ -37,6 +38,12 @@ public:
         {
             auto [x, y] = minesPsbl[i];
             board[y][x].setHasMine(true);
+        }
+
+        for (int i = mineCount; i < mineCount + timeMineCount && i < minesPsbl.size(); ++i)
+        {
+            auto [x, y] = minesPsbl[i];
+            board[y][x].setIsTimeMine(true);
         }
     }
 

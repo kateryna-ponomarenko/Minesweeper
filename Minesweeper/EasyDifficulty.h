@@ -4,6 +4,6 @@ class EasyDifficulty :
     public Difficulty
 {
 public:
-    EasyDifficulty() : Difficulty("Easy", 9, 9, 10, 300) {}
+    EasyDifficulty() : Difficulty("Easy", 9, 9, 10, 300) { timeMinesCount = 2; }
 };
 

@@ -4,6 +4,6 @@ class HardDifficulty :
     public Difficulty
 {
 public:
-    HardDifficulty() : Difficulty("Hard", 30, 16, 99, 900) {}
+    HardDifficulty() : Difficulty("Hard", 30, 16, 99, 900) { timeMinesCount = 8; }
 };
 

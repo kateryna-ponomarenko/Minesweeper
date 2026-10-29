@@ -10,35 +10,25 @@ private:
 	bool IsFlagged;
 	bool IsQuestioned;
 	int neighboringMines;
-	bool isTimeMine = false;
+	bool isTimeMine;
 
 public:
 	
-	Cell(int xCoord, int yCoord): CellX(xCoord), CellY(yCoord), hasMine(false), IsRevealed(false), IsFlagged(false), IsQuestioned(false), neighboringMines(0) {}
+	Cell(int xCoord, int yCoord): CellX(xCoord), CellY(yCoord), hasMine(false), IsRevealed(false), IsFlagged(false), IsQuestioned(false), neighboringMines(0), isTimeMine(false) {}
 
 	void setHasMine(bool value) {hasMine = value;}
 	void setRevealed(bool value) { IsRevealed = value; }
 	void setFlagged(bool value) { IsFlagged = value; }
 	void setQuestioned(bool value) { IsQuestioned = value; }
 	void setNeighboringMines(int value) { neighboringMines = value; }
+	void setIsTimeMine(bool value) { isTimeMine = value; }
 
 	void reveal()
 	{
 		if (!IsRevealed && !IsFlagged)
 		{
 			IsRevealed = true;
-			//if (hasMine)
-			//{
-			//	// Handle mine reveal
-			//}
-			//else if (neighboringMines == 0)
-			//{
-			//	// Handle revealing neighboring cells logic here
-			//}
-			//else if (neighboringMines > 0)
-			//{
-			//	// Handle revealing the number of neighboring mines logic here
-			//}
+			IsQuestioned = false;
 		}
 		
 	}
@@ -74,6 +64,11 @@ public:
 	{
 		return IsFlagged;
 	}
+	bool getIsTimeMine() const
+	{
+		return isTimeMine;
+	}
+
 	bool getIsQuestioned() const
 	{
 		return IsQuestioned;
@@ -93,8 +88,5 @@ public:
 		return CellY;
 	}
 
-
-	void setTimeMine(bool value) { isTimeMine = value; }
-	bool getIsTimeMine() const { return isTimeMine; }
 
 };

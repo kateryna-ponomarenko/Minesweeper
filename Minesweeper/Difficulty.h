@@ -11,6 +11,9 @@ protected:
     int minesCount;
     int timeLimitSeconds;
 
+    int timeMinesCount = 0;
+    int timePenaltySeconds = 30;
+
 public:
     Difficulty(std::string n, int w, int h, int m, int t)
         : level(n), width(w), height(h), minesCount(m), timeLimitSeconds(t) {
@@ -21,6 +24,8 @@ public:
     int getMinesCount() const { return minesCount; }
     int getLimitSeconds() const { return timeLimitSeconds; }
     std::string getLevel() const { return level; }
+    int getTimeMinesCount() const { return timeMinesCount; }
+    int getTimePenalty() const { return timePenaltySeconds; }
 
     void setTime(int minutes) { timeLimitSeconds = minutes; }
 

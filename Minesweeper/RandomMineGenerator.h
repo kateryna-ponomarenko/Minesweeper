@@ -11,10 +11,12 @@ class RandomMineGenerator :
 {
 private:
     int mineCount;
+    int timeMineCount;
 
 
 public:
-    RandomMineGenerator(int count) : mineCount(count) {}
+    RandomMineGenerator(int count, int timeCount = 0)
+    : mineCount(count), timeMineCount(timeCount) {}
 
 
     void generate(std::vector<std::vector<Cell>>& board, int safeX, int safeY) override 
@@ -40,6 +42,13 @@ public:
             auto [x, y] = minesPsbl[i];
             board[y][x].setHasMine(true);
         }
+
+        for (int i = mineCount; i < mineCount + timeMineCount && i < minesPsbl.size(); ++i)
+        {
+            auto [x, y] = minesPsbl[i];
+            board[y][x].setIsTimeMine(true);
+        }
+         
     }
 };
 

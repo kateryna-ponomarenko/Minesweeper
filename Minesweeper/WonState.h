@@ -1,14 +1,17 @@
 #pragma once
 #include "GameState.h"
-#include "Game.h"
+
 
 class WonState :
     public GameState
 {
-    void openCell(Game& game, int x, int y) override;
+public:
+    GameStatus getStatus() const override { return GameStatus::Won; }
 
-    void toggleMark(Game& game, int x, int y) override;
+    void openCell(Game& game, int x, int y) override {}
 
-    void update(Game& game) override {}
+    void toggleMark(Game& game, int x, int y) override {}
+
+    void update(Game& game) override;
 };
 

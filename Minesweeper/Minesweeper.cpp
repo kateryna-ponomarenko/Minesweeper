@@ -1,20 +1,78 @@
-﻿// Minesweeper.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
-#include <iostream>
+﻿#include <iostream>
+#include <string>
+#include "Game.h"
+#include "Renderer.h"
+#include "EasyDifficulty.h"
+#include "MediumDifficulty.h"
+#include "HardDifficulty.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	
+	std::cout << "1 - Easy, 2 - Medium, 3 - Hard\n";
+	std::cout << "Choose difficulty: ";
+	int level;
+	std::cin >> level;
+
+	Difficulty diff = MediumDifficulty();
+	if (level == 1) diff = EasyDifficulty();
+	if (level == 3) diff = HardDifficulty();
+
+	
+	char answer;
+	std::cout << "Time attack mode? (y/n): ";
+	std::cin >> answer;
+	bool timed = (answer == 'y');
+
+	std::cout << "Safe first click? (y/n): ";
+	std::cin >> answer;
+	bool safe = (answer == 'y');
+
+	
+	Game game(diff, timed, safe);
+	Renderer renderer(game);
+	game.subscribe(&renderer);
+
+	std::cout << "Commands: o x y (open), f x y (flag), r (restart), q (quit)\n";
+	renderer.draw();
+
+	
+	std::string cmd;
+	while (true)
+	{
+		std::cout << "> ";
+		std::cin >> cmd;
+
+		if (cmd == "q")
+		{
+			break;
+		}
+		else if (cmd == "r")
+		{
+			game.restart();
+		}
+		else if (cmd == "o" || cmd == "f")
+		{
+			int x, y;
+			std::cin >> x >> y;
+
+			if (x < 0 || x >= game.getBoard().getWidth() ||
+				y < 0 || y >= game.getBoard().getHeight())
+			{
+				std::cout << "Out of range\n";
+				continue;
+			}
+
+			if (cmd == "o") game.openCell(x, y);
+			else            game.toggleMark(x, y);
+		}
+		else
+		{
+			std::cout << "Unknown command\n";
+		}
+
+		if (timed) game.update();   
+	}
+
+	return 0;
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.

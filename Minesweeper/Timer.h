@@ -4,8 +4,10 @@
 class Timer
 {
 private:
-	int elapsedTime;
+	
 	int timeLimit;
+	int elapsedTime;
+
 	bool running;
 	std::chrono::steady_clock::time_point startPoint;
 
@@ -14,16 +16,18 @@ public:
 
 	void startTimer()
 	{
+		if (running) return;
 		running = true;
 		startPoint = std::chrono::steady_clock::now();
 	}
 
 	void stopTimer()
 	{
-		if (running) 
+		if (running)
 		{
 			auto now = std::chrono::steady_clock::now();
-			elapsedTime += std::chrono::duration_cast<std::chrono::seconds>(now - startPoint).count();
+			elapsedTime += static_cast<int>(
+				std::chrono::duration_cast<std::chrono::seconds>(now - startPoint).count());
 			running = false;
 		}
 	}
@@ -41,9 +45,11 @@ public:
 
 	int getElapsedTime()
 	{
-		if (running) {
+		if (running)
+		{
 			auto now = std::chrono::steady_clock::now();
-			return elapsedTime + std::chrono::duration_cast<std::chrono::seconds>(now - startPoint).count();
+			return elapsedTime + static_cast<int>(
+				std::chrono::duration_cast<std::chrono::seconds>(now - startPoint).count());
 		}
 		return elapsedTime;
 	}
@@ -51,6 +57,13 @@ public:
 	bool isTimeUp()
 	{
 		return getElapsedTime() >= timeLimit;
+	}
+
+	int getRemainingTime()
+	{
+		int left = timeLimit - getElapsedTime();
+		if (left < 0) return 0;
+		return left;
 	}
 };
 

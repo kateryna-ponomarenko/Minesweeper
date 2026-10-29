@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include <iostream>
 #include <vector>
 #include "Cell.h"
@@ -11,7 +12,7 @@ private:
 	int width;
 	int height;
 	int mineCount;
-	MineGenerator* generator = nullptr;
+	std::unique_ptr<MineGenerator> generator;
 
 public:
 	
@@ -28,9 +29,10 @@ public:
 		} //matrix[y][x]
 	}
 
-	void setGenerator(MineGenerator* gen)
+	void setGenerator(std::unique_ptr<MineGenerator> gen)
 	{
-		generator = gen;
+		generator = std::move(gen);
+
 	}
 
 	void generateMines(int safeX, int safeY)
@@ -105,19 +107,56 @@ public:
 	void revealAllCells()
 	{
 		for (int y = 0; y < height; ++y)
-		{
 			for (int x = 0; x < width; ++x)
 			{
 				cells[y][x].reveal();
 			}
-		}
+		
 	} 
+
+	void revealAllMines()
+	{
+		for (int y = 0; y < height; ++y)
+			for (int x = 0; x < width; ++x)
+			{
+				Cell& cell = cells[y][x];
+				if (cell.getHasMine())
+				{
+					cell.reveal();
+				}
+			}
+		
+	}
+
+	void flagAllMines()
+	{
+		for (int y = 0; y < height; ++y)
+			for (int x = 0; x < width; ++x)
+			{
+				Cell& cell = cells[y][x];
+				if (cell.getHasMine())
+				{
+					cell.setQuestioned(false);
+					cell.setFlagged(true);
+				}
+			}
+	}
+
+
 	
 	int getWidth() { return width; }
 	int getHeight() { return height; }
 	int getMineCount() { return mineCount; }
+	Cell& getCell(int x, int y)
+	{
+		return cells[y][x];
+	}
 	
-	
+	bool isInside(int x, int y)
+	{
+		return x >= 0 && x < width && y >= 0 && y < height;
+	}
+
 
 };
 
