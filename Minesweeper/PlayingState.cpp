@@ -26,7 +26,7 @@ void PlayingState::openCell(Game& game, int x, int y)
 
     if (cell.getIsTimeMine())
     {
-        game.getTimer().addPenalty(30);
+        game.getTimer().addPenalty(game.getDifficulty().getTimePenalty());
     }
 
     if (cell.getNeighboringMines() == 0)

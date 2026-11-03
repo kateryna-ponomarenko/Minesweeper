@@ -10,6 +10,5 @@ public:
 	virtual ~MineGenerator() = default;
 
 
-	void placeTimeMines();
 };
 

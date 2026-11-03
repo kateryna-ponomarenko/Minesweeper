@@ -111,10 +111,13 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\katya\OneDrive\Рабочий стол\SFML-2.6.2-windows-vc17-64-bit\SFML-2.6.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>"C:\Users\katya\OneDrive\Рабочий стол\SFML-2.6.2-windows-vc17-64-bit\SFML-2.6.2\lib";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>
@@ -158,6 +161,7 @@
     <ClCompile Include="ReadyState.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="SafeFirstClickGenerator.cpp" />
+    <ClCompile Include="SFMLRenderer.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="WonState.cpp" />
   </ItemGroup>
@@ -180,6 +184,7 @@
     <ClInclude Include="ReadyState.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="SafeFirstClickGenerator.h" />
+    <ClInclude Include="SFMLRenderer.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="WonState.h" />
   </ItemGroup>

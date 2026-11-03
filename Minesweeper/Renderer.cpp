@@ -41,8 +41,12 @@ void Renderer::draw()
 			if (cell.getIsRevealed())
 			{
 				if (cell.getHasMine() == true) symbol = '*';
-				else if (cell.getNeighboringMines() == 0) symbol = '_';
+				
 				else if (cell.getIsTimeMine()) symbol = 'T';
+				
+				else if (cell.getNeighboringMines() == 0) symbol = '_';
+				
+
 				else symbol = static_cast<char>('0' + cell.getNeighboringMines());
 				
 			}
