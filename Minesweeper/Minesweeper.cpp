@@ -1,36 +1,16 @@
-﻿#include <iostream>
-#include <string>
+﻿#include "EasyDifficulty.h"
 #include "Game.h"
-#include "Renderer.h"
-#include "EasyDifficulty.h"
-#include "MediumDifficulty.h"
-#include "HardDifficulty.h"
-#include <SFML/Graphics.hpp>
-
-
+#include "SFMLRenderer.h"
 
 int main()
 {
-    sf::RenderWindow window(
-        sf::VideoMode(800, 600),
-        "Minesweeper"
-    );
+    EasyDifficulty difficulty;
 
-    while (window.isOpen())
-    {
-        sf::Event event;
+    Game game(difficulty, false, true);
 
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-            {
-                window.close();
-            }
-        }
+    SFMLRenderer renderer(game);
 
-        window.clear(sf::Color::Black);
-        window.display();
-    }
+    renderer.run();
 
     return 0;
 }
