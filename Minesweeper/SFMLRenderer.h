@@ -3,6 +3,7 @@
 #include "Game.h"
 #include <SFML/Graphics.hpp>
 #include "Cell.h"
+#include "ScreenState.h"
 
 
 class SFMLRenderer :
@@ -12,11 +13,24 @@ private:
 	Game& game;
 	sf::RenderWindow window; //об'єкт вікна SFML
 	sf::Font font;
+	ScreenState currentScreen = ScreenState::MainMenu;
 
-	//static constexpr - одна спільна константа для всіх об'єктів.
+	sf::RectangleShape timeGame;
+	sf::RectangleShape classicGame;
+
+	sf::RectangleShape notSafeClick;
+	sf::RectangleShape safeClick;
+
+	sf::RectangleShape LoseButton;
+	sf::RectangleShape WinButton;
+
+	sf::RectangleShape EasyButton;
+	sf::RectangleShape MediumButton;
+	sf::RectangleShape HardButton;
+	
 	static constexpr float CELL_SIZE = 32.f; // Розмір однієї клітинки ігрового поля
-	static constexpr float OFFSET_X = 20.f;
-	static constexpr float OFFSET_Y = 60.f; // Зсув для розташування ігрового поля на екрані
+	float boardOffsetX = 20.f;
+	float boardOffsetY = 60.f; // Зсув для розташування ігрового поля на екрані
 
 public:
 
@@ -29,7 +43,12 @@ public:
 	void drawBoard();// метод для відображення ігрового поля
 	void drawUserInterface(); // метод для відображення елементів користувацького інтерфейсу
 
-	
-
+	void drawMainMenu();
+	void drawGameScreen();
+	void drawVictoryScreen();
+	void drawGameOverScreen();
+	void drawModeSelectionScreen();
+	void drawDifficultySelectionScreen();
+	void drawSafeClickSelectionScreen();
 };
 

@@ -42,6 +42,21 @@ public:
 		
 	}
 
+	void setTimeMode(bool timed)
+	{
+		modeTime = timed;
+	}
+
+	void  setSafeFirstClick(bool safe)
+	{
+		safeClick = safe;
+	}
+
+	void setDifficulty(const Difficulty& diff)
+	{
+		difficulty = diff;
+	}
+
 	void openCell(int x, int y)
 	{
 		if (state != nullptr)
@@ -102,6 +117,7 @@ public:
 	void restart()
 	{
 		board = Factory::create(difficulty, safeClick, modeTime);
+		timer.setLimit(difficulty.getLimitSeconds());
 		timer.resetTimer();
 		setState(std::make_unique<ReadyState>());
 		notifyObservers();

@@ -65,5 +65,7 @@ public:
 		if (left < 0) return 0;
 		return left;
 	}
+
+	void setLimit(int seconds) { timeLimit = seconds; }
 };
 
