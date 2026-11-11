@@ -4,6 +4,7 @@
 #include "EasyDifficulty.h"
 #include "MediumDifficulty.h"
 #include "HardDifficulty.h"
+#include <algorithm>
 
 SFMLRenderer::SFMLRenderer(Game& game) : game(game), window(sf::VideoMode(1100, 700), "Minesweeper")
 {
@@ -16,7 +17,7 @@ SFMLRenderer::SFMLRenderer(Game& game) : game(game), window(sf::VideoMode(1100, 
 
 void  SFMLRenderer::update()
 {
-	// Rendering is handled inside draw() воно тут лише через обсервер
+
 }
 
 void SFMLRenderer::run()
@@ -350,10 +351,12 @@ void SFMLRenderer::drawBoard()
 					window.draw(cellShape);
 
 					sf::Text numberText;
-					numberText.setString("*");
+					
 					numberText.setFont(font);
 					numberText.setCharacterSize(24);
 					numberText.setFillColor(sf::Color::White);
+					int n = cell.getNeighboringMines();
+					numberText.setString(n > 0 ? std::to_string(n) : "T");
 					// Встановлення позиції тексту
 					sf::FloatRect bounds = cellShape.getGlobalBounds();
 					numberText.setPosition(
@@ -466,11 +469,26 @@ void SFMLRenderer::drawUserInterface()
 
 
 	// Відображення таймера гри
+	int shown;
+	std::string label;
+
+	if (game.getTimeMode())
+	{
+		shown = game.getTimer().getRemainingTime();
+		label = "Time left: ";
+	}
+	else
+	{
+		shown = std::min(game.getTimer().getElapsedTime(), 999);   // класика: вгору, максимум 999
+		label = "Time: ";
+	}
+
 
 	sf::Text timeText;
 	timeText.setFont(font);
 	timeText.setCharacterSize(20);
-	timeText.setString("Time: " + std::to_string(game.getTimer().getRemainingTime()));
+
+	timeText.setString(label + std::to_string(shown));
 	
 	//centring
 	sf::FloatRect timeBounds =
@@ -784,9 +802,9 @@ void SFMLRenderer::drawVictoryScreen()
 	
 	sf::Text victoryText;
 	victoryText.setFont(font);
-	victoryText.setCharacterSize(48);
+	victoryText.setCharacterSize(30);
 	victoryText.setString("Victory!");
-	victoryText.setFillColor(sf::Color::White);
+	victoryText.setFillColor(sf::Color::Blue);
 
 	victoryText.setPosition(
 		(WinButton.getPosition().x + (WinButton.getSize().x - victoryText.getLocalBounds().width) / 2.f),
@@ -820,7 +838,7 @@ void SFMLRenderer::drawGameOverScreen()
 	
 	sf::Text gameOverText;
 	gameOverText.setFont(font);
-	gameOverText.setCharacterSize(48);
+	gameOverText.setCharacterSize(30);
 	gameOverText.setString("Game Over!");
 	gameOverText.setFillColor(sf::Color::White);
 

@@ -43,7 +43,7 @@ public:
 		elapsedTime += seconds;
 	}
 
-	int getElapsedTime()
+	int getElapsedTime() const
 	{
 		if (running)
 		{
@@ -54,12 +54,12 @@ public:
 		return elapsedTime;
 	}
 
-	bool isTimeUp()
+	bool isTimeUp() const
 	{
 		return getElapsedTime() >= timeLimit;
 	}
 
-	int getRemainingTime()
+	int getRemainingTime() const
 	{
 		int left = timeLimit - getElapsedTime();
 		if (left < 0) return 0;

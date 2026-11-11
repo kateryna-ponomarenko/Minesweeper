@@ -88,7 +88,7 @@ public:
 		}
 	}
 
-	void revealNeighbors(int x, int y)
+	void revealNeighbors(int x, int y, std::vector<Cell*>& opened)
 	{
 		auto neighbors = getNeighbors(x, y);
 		for (Cell* neighbor : neighbors)
@@ -96,9 +96,10 @@ public:
 			if (!neighbor->getIsRevealed() && !neighbor->getIsQuestioned() && !neighbor->getIsFlagged())
 			{
 				neighbor->reveal();
+				opened.push_back(neighbor);
 				if (neighbor->getNeighboringMines() == 0 && !neighbor->getHasMine())
 				{
-					revealNeighbors(neighbor->getX(), neighbor->getY());
+					revealNeighbors(neighbor->getX(), neighbor->getY(), opened);
 				}
 			}
 		}
@@ -142,17 +143,32 @@ public:
 			}
 	}
 
+	std::vector<Cell*> reveal(int x, int y)
+	{
+		std::vector<Cell*> opened;
+		if (!isInside(x, y)) return opened;
 
+		Cell& start = cells[y][x];
+		if (start.getIsRevealed() || start.getIsFlagged() || start.getIsQuestioned())return opened;
 	
-	int getWidth() { return width; }
-	int getHeight() { return height; }
-	int getMineCount() { return mineCount; }
+		start.reveal();
+		opened.push_back(&start);
+
+		if (!start.getHasMine() && start.getNeighboringMines() == 0)
+			revealNeighbors(x, y, opened);
+
+		return opened;
+	}
+	
+	int getWidth() const { return width; }
+	int getHeight() const { return height; }
+	int getMineCount() const { return mineCount; }
 	Cell& getCell(int x, int y)
 	{
 		return cells[y][x];
 	}
-	
-	bool isInside(int x, int y)
+
+	bool isInside(int x, int y) const
 	{
 		return x >= 0 && x < width && y >= 0 && y < height;
 	}

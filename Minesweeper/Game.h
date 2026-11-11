@@ -79,7 +79,14 @@ public:
 	{
 		if (state != nullptr)
 		{
+			GameStatus before = state->getStatus();
+
 			state->update(*this);
+
+			if (state->getStatus() != before)
+			{
+				notifyObservers();
+			}
 		}
 	}
 
@@ -139,37 +146,37 @@ public:
 
 
 
-	Board& getBoard()
+	Board& getBoard() 
 	{
 		return *board;
 	}
 
-	Timer& getTimer()
+	Timer& getTimer() 
 	{
 		return timer;
 	}
 	
-	Difficulty& getDifficulty()
+	Difficulty& getDifficulty() 
 	{
 		return difficulty;
 	}
 	
-	bool getTimeMode() 
+	bool getTimeMode() const
 	{
 		return modeTime;
 	}
 	
-	bool getSafeFirstClick()
+	bool getSafeFirstClick() const
 	{
 		return safeClick;
 	}
 
-	GameStatus getStatus()
+	GameStatus getStatus() const
 	{
 		return state->getStatus();
 	}
 
-	int getMinesLeft()
+	int getMinesLeft() 
 	{
 		int flags = 0;
 

@@ -12,27 +12,22 @@ void PlayingState::openCell(Game& game, int x, int y)
 
     auto& cell = board.getCell(x, y);
 
+    std::vector<Cell*> opened = board.reveal(x, y);
 
-    if (cell.getIsRevealed() || cell.getIsQuestioned() || cell.getIsFlagged()) { return; }
-
-    board.revealCell(x, y);
-   
-    if (cell.getHasMine())
+    for (Cell* c : opened)
     {
-        game.setState(std::make_unique<LostState>());
-        game.update(); // зупинить таймер і покаже всі міни
-        return;
+        if (c->getHasMine())
+        {
+            game.setState(std::make_unique<LostState>());
+            game.update();
+            return;
+        }
+        else if (c->getIsTimeMine() && game.getTimeMode())
+        {
+            game.getTimer().addPenalty(game.getDifficulty().getTimePenalty());
+        }
     }
 
-    if (cell.getIsTimeMine())
-    {
-        game.getTimer().addPenalty(game.getDifficulty().getTimePenalty());
-    }
-
-    if (cell.getNeighboringMines() == 0)
-    {
-        board.revealNeighbors(x, y);
-    }
 
     if (game.checkWinCondition() == true)
     {

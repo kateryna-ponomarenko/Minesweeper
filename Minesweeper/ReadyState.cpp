@@ -7,15 +7,17 @@ void ReadyState::openCell(Game& game, int x, int y)
 {
     if (!game.getBoard().isInside(x, y)) return;
 
-    Cell& cell = game.getBoard().getCell(x, y);
+    auto& board = game.getBoard();
+
+    Cell& cell = board.getCell(x, y);
     if (cell.getIsFlagged() || cell.getIsQuestioned()) return;
 
-    game.getBoard().generateMines(x, y);
+    board.generateMines(x, y);
     game.getTimer().startTimer();
    
+    board.reveal(x, y);
+    
     game.setState(std::make_unique<PlayingState>());
-    game.openCell(x, y);
-
 }
 
 void ReadyState::toggleMark(Game& game, int x, int y)  
